@@ -14,7 +14,8 @@ app.use(cors({ origin: true }));
 
 async function linker(req) {
   const clearID = req.originalUrl.replace("/l/","");
-  const linkID = clearID.slice(0,clearID.indexOf("?"));
+  const regex = /[^A-Za-z0-9]/g;
+  const linkID = clearID.replace(regex,"");
   console.log(linkID);
   var url;
   var fullUrl = req.protocol + '://' + req.get('host');
