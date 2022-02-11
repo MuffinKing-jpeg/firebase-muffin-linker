@@ -13,7 +13,9 @@ const app = express();
 app.use(cors({ origin: true }));
 
 async function linker(req) {
-  const linkID = req.originalUrl.replace("/l/","");
+  const clearID = req.originalUrl.replace("/l/","");
+  const linkID = clearID.slice(0,clearID.indexOf("?"));
+  console.log(linkID);
   var url;
   var fullUrl = req.protocol + '://' + req.get('host');
   await db.collection("link").doc(linkID).get()
@@ -35,6 +37,5 @@ async function linker(req) {
   return url;
 }
 
-// build multiple CRUD interfaces:
 app.get('/l/**', (req, res) => {linker(req).then((data) => res.redirect(data))});
-exports.linker = functions.https.onRequest(app);
+exports.linker = functions.region('europe-west1').https.onRequest(app);

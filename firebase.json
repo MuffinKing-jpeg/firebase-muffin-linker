@@ -20,12 +20,8 @@
                 "source": "/404",
                 "destination": "/404.html"
             }
-
         ],
-        "ignore": [
-          "firebase.json",
-          "**/.*",
-          "**/node_modules/**"]
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     },
 
     "storage": {
